@@ -20,7 +20,9 @@ const App = () => {
     <div className="App">
 
       <PhotoListItem  data  = {sampleDataForPhotoListItem} />
-      
+      <PhotoListItem  data  = {sampleDataForPhotoListItem} />
+      <PhotoListItem  data  = {sampleDataForPhotoListItem} />
+
     </div>
   );
 };
