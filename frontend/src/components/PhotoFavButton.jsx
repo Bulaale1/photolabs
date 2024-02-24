@@ -7,9 +7,12 @@ function PhotoFavButton() {
 
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleIconClick = () => {
+  // const handleIconClick = () => {
 
-    setIsClicked(!isClicked);
+  //   setIsClicked(!isClicked);
+  // };
+  const handleIconClick = () => {
+    setIsClicked(prev => !prev);
   };
   return (
     <div className="photo-list__fav-icon">
