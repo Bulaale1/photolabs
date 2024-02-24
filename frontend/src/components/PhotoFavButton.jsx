@@ -6,11 +6,7 @@ import '../styles/PhotoFavButton.scss';
 function PhotoFavButton() {
 
   const [isClicked, setIsClicked] = useState(false);
-
-  // const handleIconClick = () => {
-
-  //   setIsClicked(!isClicked);
-  // };
+  
   const handleIconClick = () => {
     setIsClicked(prev => !prev);
   };
