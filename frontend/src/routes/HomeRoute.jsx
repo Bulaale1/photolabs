@@ -2,13 +2,14 @@ import React from 'react';
 import '../styles/HomeRoute.scss';
 import TopNavigation from '../components/TopNavigationBar'
 import PhotoList from '../components/PhotoList';
+import photos from 'mocks/photos';
+
 
 const HomeRoute = () => {
   return (
     <div className="home-route">
-    <h2>HomeRoute</h2>
     <TopNavigation />
-    <PhotoList />
+    <PhotoList photos = {photos}/>
     </div>
   );
 };

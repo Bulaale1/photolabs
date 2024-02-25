@@ -2,17 +2,16 @@ import React from 'react';
 
 import PhotoList from 'components/PhotoList';
 import './App.scss';
-// import TopNavigation from 'components/TopNavigationBar';
-// import PhotoList from 'components/PhotoList';
 import HomeRoute from 'routes/HomeRoute';
-// <TopNavigation />
-// <PhotoList />
+import  photos from '../src/mocks/photos';
+
+
 // Note: Rendering a single component to build components in isolation
 const App = () => {
 
   return (
     <div className="App">
-    <HomeRoute />
+    <HomeRoute photoData = {photos}/>
     </div>
   );
 };

@@ -4,12 +4,6 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
-  // user: {
-  //   id: "1",
-  //   username: "exampleuser",
-  //   name: "Joe Example",
-  //   profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-  // }
 
   const { id, location,urls, user} = props.photo;
 
