@@ -30,7 +30,7 @@ const TopicList = () => {
         key={topic.id}
         id={topic.id}
         slug={topic.slug}
-        label={topic.label}
+        title={topic.label}
       />
     ))}
     </div>
