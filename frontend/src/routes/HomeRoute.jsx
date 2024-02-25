@@ -5,11 +5,11 @@ import PhotoList from '../components/PhotoList';
 // import photos from 'mocks/photos';
 
 
-const HomeRoute = () => {
+const HomeRoute = (props) => {
   return (
     <div className="home-route">
-    <TopNavigation topic= {topic}/>
-    <PhotoList photos = {photos}/>
+      <TopNavigation topic={props.topic} />
+      <PhotoList photos={props.photoData} />
     </div>
   );
 };
