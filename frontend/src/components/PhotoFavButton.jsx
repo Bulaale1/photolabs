@@ -10,11 +10,12 @@ function PhotoFavButton() {
   const handleIconClick = () => {
     setIsClicked(prev => !prev);
   };
+    // <FavIcon displayAlert={!!isFavPhotoExist} selected={true}/>
   return (
     <div className="photo-list__fav-icon">
       <div className="photo-list__fav-icon-svg" onClick={handleIconClick}>
       <FavIcon isClicked={isClicked} />
-      <FavIcon displayAlert={!!isFavPhotoExist} selected={true}/>
+    
       
       </div>
     </div>
