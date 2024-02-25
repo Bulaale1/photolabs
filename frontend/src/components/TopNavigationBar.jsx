@@ -3,9 +3,10 @@ import React from 'react';
 import '../styles/TopNavigationBar.scss'
 import TopicList from './TopicList';
 import FavBadge from './FavBadge';
-import  Topics from '../mocks/topics';
+// import  Topics from '../mocks/topics';
 
-const TopNavigation = () => {
+const TopNavigation = (props) => {
+  const Topics = props.topic;
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs </span>
