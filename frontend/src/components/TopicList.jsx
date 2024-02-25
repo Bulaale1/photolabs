@@ -7,6 +7,7 @@ import TopicListItem from "./TopicListItem";
 
 const TopicList = (props) => {
   const topic = props.topics;
+  
   return (
     <div className="top-nav-bar__topic-list">
     {topic.map((topic) => (
@@ -14,7 +15,7 @@ const TopicList = (props) => {
         key={topic.id}
         id={topic.id}
         slug={topic.slug}
-        title={topic.label}
+        title={topic.title}
       />
     ))}
     </div>
