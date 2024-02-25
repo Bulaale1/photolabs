@@ -1,21 +1,18 @@
 import React from 'react';
 
-import PhotoListItem from './components/PhotoListItem';
+// import PhotoListItem from './components/PhotoListItem';
+import PhotoList from 'components/PhotoList';
 
 import './App.scss';
+import TopicList from 'components/TopicList';
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
- 
-// const photos = [...Array(3)];
-// const photoItems = photos.map((photo, index) => 
-// <PhotoListItem key={index} data={sampleDataForPhotoListItem} />
-// );
+
   return (
     <div className="App">
-
-    <PhotoList />
-
+    <TopicList />
+     <PhotoList />
     </div>
   );
 };
