@@ -1,23 +1,21 @@
 import React, { useCallback, useState } from 'react';
-
-import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
+import FavIcon from './FavIcon';
 
 function PhotoFavButton() {
-  // (<FavIcon isClicked={isClicked} />)
   const [isClicked, setIsClicked] = useState(false);
   
   const handleIconClick = () => {
-    setIsClicked(prev => !prev);
+    setIsClicked((prev) => !prev);
   };
-    // <FavIcon displayAlert={!!isFavPhotoExist} selected={true}/>
+
   return (
-    <div className="photo-list__fav-icon">
+    <div>
+    <div className={`photo-list__fav-icon ${isClicked ? 'photo-list__fav-icon-svg' : ''}`}>
       <div className="photo-list__fav-icon-svg" onClick={handleIconClick}>
-      <FavIcon isClicked={isClicked} />
-    
-      
+        <FavIcon isClicked={isClicked} />
       </div>
+    </div>
     </div>
   );
 }
