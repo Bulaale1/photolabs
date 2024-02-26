@@ -15,12 +15,16 @@ const PhotoDetailsModal = () => {
   };
 
   return (
+    <div>
+    <button onClick={openModal}/>
     <div className={`photo-details-modal ${modalOpen ? 'open' : ''}`}>
       <button className="photo-details-modal__close-button" onClick={closeModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
     </div>
+    </div>
   );
 };
 
 export default PhotoDetailsModal;
+

@@ -10,7 +10,7 @@ const PhotoListItem = (props) => {
 
   return (
     <div className="photo-list__item">
-    <PhotoFavButton />
+    <PhotoFavButton  />
     <img src={urls.full} alt={`Photo ${id}`} className="photo-list__image"
     onClick={() => setDisplayModal(true)}
     />
