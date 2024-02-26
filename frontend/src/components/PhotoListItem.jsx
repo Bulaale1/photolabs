@@ -6,7 +6,7 @@ import PhotoFavButton from "./PhotoFavButton";
 const PhotoListItem = (props) => {
 
   const { id, location,urls, user} = props.photo;
-  const setDisplayModal = props;
+  const { setDisplayModal } = props;
 
   return (
     <div className="photo-list__item">
