@@ -3,9 +3,11 @@ import '../styles/PhotoFavButton.scss';
 import FavIcon from './FavIcon';
 
 function PhotoFavButton() {
+
   const [isClicked, setIsClicked] = useState(false);
   
   const handleIconClick = () => {
+    
     setIsClicked((prev) => !prev);
   };
 
