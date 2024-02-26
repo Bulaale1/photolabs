@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div className="App">
     <HomeRoute photos={photos} topics={topics} setDisplayModal={setDisplayModal} />
-    {displayModal && <PhotoDetailsModal />}
+    {displayModal && <PhotoDetailsModal  closeModal={() => setDisplayModal(false)}/>}
      
     </div>
   );
