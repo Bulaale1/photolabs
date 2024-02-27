@@ -4,10 +4,15 @@ import PhotoListItem from "./PhotoListItem";
 const PhotoList = (props) => {
   const { setDisplayModal } = props;
   const photData = props.photos;
+  // const similarPhotos = ()=>{
+
+  // }
   return (
     <ul className="photo-list">
     {photData.map((photo) => (
-      <PhotoListItem key={photo.id} photo = {photo} setDisplayModal={setDisplayModal} />
+      <PhotoListItem key={photo.id} photo = {photo} setDisplayModal={setDisplayModal}
+       openModal={() => openModal(photo)}/>
+      
     ))}
 
     </ul>

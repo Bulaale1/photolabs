@@ -14,7 +14,7 @@ const App = () => {
     <div className="App">
     <HomeRoute photos={photos} topics={topics} setDisplayModal={setDisplayModal} />
     {displayModal && <PhotoDetailsModal  closeModal={() => setDisplayModal(false)}
-    selectedImage={selectedImage}/>}
+    selectedImage={selectedImage} />}
      
     </div>
   );
