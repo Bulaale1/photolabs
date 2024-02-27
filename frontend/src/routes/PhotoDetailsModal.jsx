@@ -12,6 +12,8 @@ const PhotoDetailsModal = (props) => {
         <button className="photo-details-modal__close-button" onClick={closeModal}>
           <img src={closeSymbol} alt="close symbol" />
         </button>
+        <img src={selectedImage.urls.full} alt="Selected" />
+        <PhotoList photos={similarPhotos} />
       </div>
   );
 };
