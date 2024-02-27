@@ -6,7 +6,11 @@ import HomeRoute from 'routes/HomeRoute';
 import  photos from '../src/mocks/photos';
 import  topics from '../src/mocks/topics';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
+import userApplication from 'hooks/useApplicationData';
 const App = () => {
+  const { 
+    state, 
+  } = userApplication()
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 

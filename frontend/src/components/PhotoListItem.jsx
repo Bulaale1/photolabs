@@ -7,12 +7,13 @@ const PhotoListItem = (props) => {
 
   const { id, location,urls, user} = props.photo;
   const { setDisplayModal } = props;
+  selectedImage(props.photo);
 
   return (
     <div className="photo-list__item">
     <PhotoFavButton  />
     <img src={urls.full} alt={`Photo ${id}`} className="photo-list__image"
-    onClick={() => {setDisplayModal(true); selectedImage(props.photo);}}
+    onClick={() => {setDisplayModal(true); }}
     />
       <div className="photo-list__user-details">
       
