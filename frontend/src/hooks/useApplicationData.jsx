@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-const userApplication = ()=>{
+const useApplication = ()=>{
   const initialState = {
     //…rest of the state
     photoData: [],
@@ -23,4 +23,4 @@ const userApplication = ()=>{
 
 }
 
- export default userApplication;
+ export default useApplication;
