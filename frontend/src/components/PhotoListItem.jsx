@@ -4,7 +4,7 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
-  toggleFavourite, isFavourite 
+  // toggleFavourite, isFavourite 
   const { id, location,urls, user} = props.photo;
   const { setDisplayModal,onImageClick,toggleFavourite, isFavourite  } = props;
   const handleImageClick = () => {
