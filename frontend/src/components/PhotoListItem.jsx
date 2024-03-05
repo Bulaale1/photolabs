@@ -6,14 +6,19 @@ import PhotoFavButton from "./PhotoFavButton";
 const PhotoListItem = (props) => {
 
   const { id, location,urls, user} = props.photo;
-  const { setDisplayModal } = props;
-  selectedImage(props.photo);
+  const { setDisplayModal,onImageClick } = props;
+  const handleImageClick = () => {
+    if (onImageClick) {
+      onImageClick({ id, location, urls, user });
+    }
+  };
 
   return (
     <div className="photo-list__item">
-    <PhotoFavButton  />
+    <PhotoFavButton/>
     <img src={urls.full} alt={`Photo ${id}`} className="photo-list__image"
-    onClick={() => {setDisplayModal(true); }}
+    onClick={() => {setDisplayModal(true);
+    {handleImageClick} } }
     />
       <div className="photo-list__user-details">
       

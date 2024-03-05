@@ -4,7 +4,6 @@ import "../styles/TopicList.scss";
 
 import TopicListItem from "./TopicListItem";
 
-
 const TopicList = (props) => {
   const topic = props.topics;
   
