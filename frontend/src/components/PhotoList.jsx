@@ -4,10 +4,8 @@ import PhotoListItem from "./PhotoListItem";
 const PhotoList = (props) => {
   const { setDisplayModal,toggleFavourite, favourites } = props;
   const photData = props.photos;
-  // const onImageClick = props
-  // const {selectedPhoto }= props;
-  // const {similarPhotos} = props;
-    // onImageClick={onImageClick}
+
+  //isFavourite={favourites.includes(photo.id)}
     
   return (
     <ul className="photo-list">
@@ -21,7 +19,7 @@ const PhotoList = (props) => {
 
       toggleFavourite={toggleFavourite}
 
-      isFavourite={favourites.includes(photo.id)}
+      isFavourite={favourites}
       />      
     ))}
     </ul>

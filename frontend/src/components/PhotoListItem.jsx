@@ -12,12 +12,11 @@ const PhotoListItem = (props) => {
       onImageClick({ id, location, urls, user });
     }
   };
-
   return (
     <div className="photo-list__item">
     <PhotoFavButton
         toggleFavourite={toggleFavourite}
-        isFavourite={isFavourite}
+        isFavourite={handleImageClick}
         photoId={id}
       />
     <img src={urls.full} alt={`Photo ${id}`} className="photo-list__image"
