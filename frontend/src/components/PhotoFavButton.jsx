@@ -8,19 +8,15 @@ function PhotoFavButton(props) {
     const isAlreadyFavorited = favourites.includes(photoId);
 
   const handleToggleFavourite = () => {
-  
-    // Call the toggleFavourite function to update the global state
-    // toggleFavourite(photoId, !isAlreadyFavorited);
     toggleFavourite(photoId);
     setIsClicked(!isClicked);
   };
    // Dynamically set the class name based on the isClicked state
  const className = isClicked ? "photo-list__fav-icon-svg" : "photo-list__fav-icon";
-//  <div className="photo-list__fav-icon-svg"> </div>
   return (
     <div>
       <div className={className} onClick={handleToggleFavourite}>
-          <FavIcon selectedImage={isAlreadyFavorited} />
+          <FavIcon isFavourite={isAlreadyFavorited} />
       </div>
     </div>
   );

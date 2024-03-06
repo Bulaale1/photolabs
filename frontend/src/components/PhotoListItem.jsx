@@ -5,8 +5,8 @@ import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
   const { id, location,urls, user} = props.photo;
-  const { setDisplayModal,onImageClick,toggleFavourite, favorites=[]  } = props;
-  const isFavourite = favorites.includes(id);
+  const { setDisplayModal,onImageClick,toggleFavourite, favourites=[]  } = props;
+  const isFavourite = favourites.includes(id);
   const handleImageClick = () => {
     // Your existing logic for handling image click
     if (props.onImageClick) {
