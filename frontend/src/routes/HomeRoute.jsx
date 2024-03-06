@@ -7,8 +7,9 @@ const HomeRoute = (props) => {
     //FavoritePhotos={FavoritePhotos}
   return (
     <div className="home-route">
-    <TopNavigation topics={props.topics} favouritePhotosExist={favourites.length > 0}/>
-      <PhotoList photos={props.photos} 
+    <TopNavigation topics={props.topics} favouritePhotosExist={favourites}/>
+      <PhotoList 
+      photos={props.photos} 
       setDisplayModal={setDisplayModal}
       toggleFavourite={toggleFavourite}
       favourites={favourites}/>
