@@ -1,36 +1,48 @@
+
 import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import FavIcon from 'components/FavIcon';
+import PhotoList from './PhotoList'; // Assuming you have a PhotoList component
+
 const PhotoDetailsModal = (props) => {
-  const {closeModal,selectedImage,toggleFavourite, favourites=[]} = props;
-  console.log(selectedImage)
-  const shouldRenderFavIcon = selectedImage !== null;
-  return (
-      <div className="photo-details-modal">
-        <button className="photo-details-modal__close-button" onClick={closeModal}>
-          <img src={closeSymbol} alt="close symbol" />
-        </button>
-        {shouldRenderFavIcon && (
-          <div>
-          <img src={selectedImage.urls.full} alt={`Photo ${selectedImage.id}`} className="photo-details-modal__selected-photo" />
+ const { closeModal, selectedImage, toggleFavourite, favourites = [] } = props;
+
+ // Check if selectedImage is not null before rendering content
+ const shouldRenderContent = selectedImage !== null;
+
+ return (
+    <div className="photo-details-modal">
+      <button className="photo-details-modal__close-button" onClick={closeModal}>
+        <img src={closeSymbol} alt="Close" />
+      </button>
+      <div>
+      {shouldRenderContent && (
+        <div>
+          <img src={selectedImage.urls.full} alt={`Full version of Photo ${selectedImage.id}`} className="photo-details-modal__selected-photo" />
+          
           <FavIcon
             selected={favourites.includes(selectedImage.id)}
             toggleFavourite={toggleFavourite}
             favourites={favourites}
           />
+          
+          {/* Photographer Details */}
+          <div className="photo-details-modal__photographer-details">
+            <p>Photographer: {selectedImage.user.name}</p>
+            <p>Location: {`${selectedImage.location.city}, ${selectedImage.location.country}`}</p>
+          </div>
+          
+          {/* Similar Photos */}
           <div className="photo-details-modal__similar-photos">
             <h3>Similar Photos</h3>
-            <div className="photo-details-modal__similar-photos-list">
-              {Object.values(selectedImage.similar_photos).map((photo) => (
-                <img key={photo.id} src={photo.urls.regular} alt={`Similar Photo ${photo.id}`} className="photo-details-modal__similar-photo" />
-              ))}
-            </div>
+            <PhotoList photos={Object.values(selectedImage.similar_photos)} />
           </div>
-          </div>
-          )}
+        </div>
+      )}
       </div>
-  );
+    </div>
+ );
 };
-export default PhotoDetailsModal;
 
+export default PhotoDetailsModal;
