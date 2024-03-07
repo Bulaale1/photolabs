@@ -1,8 +1,9 @@
 import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
-import PhotoList from 'components/PhotoList';
-import photos from 'mocks/photos';
+// import PhotoList from 'components/PhotoList';
+// import photos from 'mocks/photos';
+import FavIcon from 'components/FavIcon';
 const PhotoDetailsModal = (props) => {
   const {closeModal,selectedImage} = props;
   console.log(selectedImage)
@@ -11,7 +12,7 @@ const PhotoDetailsModal = (props) => {
         <button className="photo-details-modal__close-button" onClick={closeModal}>
           <img src={closeSymbol} alt="close symbol" />
         </button>
-        
+        <FavIcon selected={selectedImage} />
       </div>
   );
 };
