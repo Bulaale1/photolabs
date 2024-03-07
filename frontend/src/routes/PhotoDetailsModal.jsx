@@ -3,7 +3,7 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import FavIcon from 'components/FavIcon';
-import PhotoList from './PhotoList'; // Assuming you have a PhotoList component
+import PhotoList from 'components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
  const { closeModal, selectedImage, toggleFavourite, favourites = [] } = props;
