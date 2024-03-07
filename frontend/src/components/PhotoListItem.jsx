@@ -22,7 +22,7 @@ const PhotoListItem = (props) => {
       />
       <img src={urls.full} alt={`Photo ${id}`} className="photo-list__image"
         onClick={() => {
-          setDisplayModal(true);
+          setDisplayModal(true, { id, location, urls, user });
           handleImageClick();
         }}
       />

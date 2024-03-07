@@ -23,7 +23,12 @@ const App = () => {
     }
   return (
     <div className="App">
-    <HomeRoute photos={photos} topics={topics} setDisplayModal={setDisplayModal} toggleFavourite={toggleFavourite}/>
+    <HomeRoute 
+    photos={photos} 
+    topics={topics} 
+    setDisplayModal={setDisplayModal} 
+    toggleFavourite={toggleFavourite}
+    setSelectedImage={setSelectedImage}/>
     {displayModal && <PhotoDetailsModal  closeModal={() => setDisplayModal(false)}
     selectedImage={selectedImage} />}
      
