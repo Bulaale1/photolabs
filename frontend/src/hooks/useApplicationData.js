@@ -25,16 +25,12 @@ const useApplicationData = () => {
  const setSelectedImage = (image) => {
     setState(prevState => ({ ...prevState, selectedImage: image }));
  };
-
  return {
-    state,
-    displayModal: state.displayModal,
-    setDisplayModal,
-    selectedImage: state.selectedImage,
-    setSelectedImage,
-    favorites: state.favorites,
-    toggleFavourite,
- };
+  state,
+  toggleFavourite,
+  setDisplayModal,
+  setSelectedImage
+};
 };
 
 export default useApplicationData;
