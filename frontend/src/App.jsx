@@ -3,8 +3,8 @@ import React,{useState} from 'react';
 
 import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
-import  photos from '../src/mocks/photos';
-import  topics from '../src/mocks/topics';
+// import  photos from '../src/mocks/photos';
+// import  topics from '../src/mocks/topics';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from 'hooks/useApplicationData';
 const App = () => {
@@ -17,8 +17,8 @@ const App = () => {
   return (
     <div className="App">
     <HomeRoute 
-    photos={photos} 
-    topics={topics} 
+    photos={state.photoData} 
+    topics={state.topicData} 
     setDisplayModal={setDisplayModal} 
     toggleFavourite={toggleFavourite}
     setSelectedImage={setSelectedImage}/>

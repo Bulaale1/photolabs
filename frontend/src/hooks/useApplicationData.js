@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from "react";
 
 // initial state
 const initialState = {
@@ -75,7 +75,30 @@ const reducer = (state, action) => {
 
 const useApplicationData = () => {
  const [state, dispatch] = useReducer(reducer, initialState);
-
+ useEffect(() => {
+  if(state.topicId === null){
+    fetch('/api/photos')
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: ACTIONS.SET_PHOTO_DATA,
+        payload: data
+      });
+    })
+    .catch(error => console.log('Error', error));
+  }
+}, [state.topicId]);
+ useEffect(() => {
+  fetch('/api/topics')
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: ACTIONS.SET_TOPIC_DATA,
+        payload: data
+      });
+    })
+    .catch(error => console.log('Error', error));
+}, []);
  const toggleFavourite = (photoId, isFavorite) => {
     if (isFavorite) {
       dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id: photoId } });
