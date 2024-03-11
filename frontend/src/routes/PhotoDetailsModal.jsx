@@ -4,7 +4,7 @@ import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import FavIcon from 'components/FavIcon';
 import PhotoList from 'components/PhotoList';
-
+import PhotoListItem from 'components/PhotoListItem';
 const PhotoDetailsModal = (props) => {
  const { closeModal, selectedImage, toggleFavourite, favourites = [] } = props;
 
@@ -19,8 +19,9 @@ const PhotoDetailsModal = (props) => {
       <div>
       {shouldRenderContent && (
         <div>
-          <img src={selectedImage.urls.full} alt={`Full version of Photo ${selectedImage.id}`} className="photo-details-modal__selected-photo" />
-          
+          <img src={selectedImage.urls.full} 
+          alt={`Full version of Photo ${selectedImage.id}`}
+           className="photo-details-modal__selected-photo" />
           <FavIcon
             selected={favourites.includes(selectedImage.id)}
             toggleFavourite={toggleFavourite}

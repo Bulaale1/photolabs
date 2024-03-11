@@ -7,7 +7,7 @@ const PhotoListItem = (props) => {
  const { setDisplayModal, toggleFavourite, favourites = [] } = props;
 
  const handleImageClick = () => {
-    // Your existing logic for handling image click
+    
     if (props.onImageClick) {
       props.onImageClick({ id, location, urls, user });
     }
@@ -18,7 +18,7 @@ const PhotoListItem = (props) => {
       <PhotoFavButton
         toggleFavourite={toggleFavourite}
         photoId={id}
-        favourites={favourites} // Pass the favorites prop to PhotoFavButton
+        favourites={favourites} 
       />
       <img src={urls.full} alt={`Photo ${id}`} className="photo-list__image"
         onClick={() => {
