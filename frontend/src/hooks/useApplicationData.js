@@ -1,36 +1,103 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
+
+// initial state
+const initialState = {
+ favPhotos: [],
+ photoModal: null,
+ photoData: [],
+ topicData: [],
+ topicId: null,
+};
+
+// action types
+export const ACTIONS = {
+  FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
+  FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
+  SELECT_PHOTO: 'SELECT_PHOTO',
+  CLOSE_SELECT_PHOTO: 'CLOSE_SELECT_PHOTO',
+  SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  GET_PHOTOS_BY_TOPIC: 'GET_PHOTOS_BY_TOPIC',
+  SET_TOPIC_ID: 'SET_TOPIC_ID',
+  REMOVE_TOPIC_ID: 'REMOVE_TOPIC_ID',
+ };
+
+// reducer function
+const reducer = (state, action) => {
+ switch (action.type) {
+    case ACTIONS.FAV_PHOTO_ADDED:
+      return {
+        ...state,
+        favPhotos: [...state.favPhotos, action.payload],
+      };
+    case ACTIONS.FAV_PHOTO_REMOVED:
+      return {
+        ...state,
+        favPhotos: state.favPhotos.filter(photo => photo.id !== action.payload.id),
+      };
+    case ACTIONS.SELECT_PHOTO:
+      return {
+        ...state,
+        photoModal: action.payload,
+      };
+    case ACTIONS.CLOSE_SELECT_PHOTO:
+      return {
+        ...state,
+        photoModal: null,
+      };
+    case ACTIONS.SET_PHOTO_DATA:
+      return {
+        ...state,
+        photoData: action.payload,
+      };
+    case ACTIONS.SET_TOPIC_DATA:
+      return {
+        ...state,
+        topicData: action.payload,
+      };
+    case ACTIONS.GET_PHOTOS_BY_TOPIC:
+      return state;
+    case ACTIONS.SET_TOPIC_ID:
+      return {
+        ...state,
+        topicId: action.payload,
+      };
+    case ACTIONS.REMOVE_TOPIC_ID:
+      return {
+        ...state,
+        topicId: null,
+      };
+    default:
+      return state;
+ }
+};
+
 
 const useApplicationData = () => {
- // Group state variables into a single state object
- const [state, setState] = useState({
-    displayModal: false,
-    selectedImage: null,
-    favorites: [],
- });
+ const [state, dispatch] = useReducer(reducer, initialState);
 
  const toggleFavourite = (photoId, isFavorite) => {
-    setState(prevState => {
-      const newFavorites = isFavorite
-        ? prevState.favorites.filter(id => id !== photoId)
-        : [...prevState.favorites, photoId];
-
-      return { ...prevState, favorites: newFavorites };
-    });
+    if (isFavorite) {
+      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id: photoId } });
+    } else {
+      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: { id: photoId } });
+    }
  };
 
  const setDisplayModal = (display) => {
-    setState(prevState => ({ ...prevState, displayModal: display }));
+    dispatch({ type: display ? ACTIONS.SELECT_PHOTO : ACTIONS.CLOSE_SELECT_PHOTO, payload: display });
  };
 
  const setSelectedImage = (image) => {
-    setState(prevState => ({ ...prevState, selectedImage: image }));
+    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: image });
  };
+
  return {
-  state,
-  toggleFavourite,
-  setDisplayModal,
-  setSelectedImage
-};
+    state,
+    toggleFavourite,
+    setDisplayModal,
+    setSelectedImage,
+ };
 };
 
 export default useApplicationData;
