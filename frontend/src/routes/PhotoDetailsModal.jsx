@@ -39,7 +39,7 @@ const PhotoDetailsModal = (props) => {
             <h3>Similar Photos</h3>
             <PhotoList 
             photos={Object.values(selectedImage.similar_photos)} 
-            favourites={favourites} and toggleFavourite={toggleFavourite} 
+            favourites={favourites} toggleFavourite={toggleFavourite} 
             />
           </div>
         </div>
