@@ -9,10 +9,11 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from 'hooks/useApplicationData';
 const App = () => {
   const {
+    state,
     toggleFavourite,
     setDisplayModal,
-    setSelectedImage,
- } =  state;
+    setSelectedImage
+  } = useApplicationData();
   return (
     <div className="App">
     <HomeRoute 
