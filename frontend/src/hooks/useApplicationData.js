@@ -55,8 +55,6 @@ const reducer = (state, action) => {
         ...state,
         topicData: action.payload,
       };
-    case ACTIONS.GET_PHOTOS_BY_TOPIC:
-      return state;
     case ACTIONS.SET_TOPIC_ID:
       return {
         ...state,
@@ -76,28 +74,39 @@ const reducer = (state, action) => {
 const useApplicationData = () => {
  const [state, dispatch] = useReducer(reducer, initialState);
  useEffect(() => {
-  if(state.topicId === null){
+  if (state.topicId === null) {
     fetch('/api/photos')
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({
-        type: ACTIONS.SET_PHOTO_DATA,
-        payload: data
-      });
-    })
-    .catch(error => console.log('Error', error));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: data,
+        });
+      })
+      .catch((error) => console.log('Error fetching photos:', error));
   }
 }, [state.topicId]);
- useEffect(() => {
+
+useEffect(() => {
   fetch('/api/topics')
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      return res.json();
+    })
     .then((data) => {
       dispatch({
         type: ACTIONS.SET_TOPIC_DATA,
-        payload: data
+        payload: data,
       });
     })
-    .catch(error => console.log('Error', error));
+    .catch((error) => console.log('Error fetching topics:', error));
 }, []);
  const toggleFavourite = (photoId, isFavorite) => {
     if (isFavorite) {
