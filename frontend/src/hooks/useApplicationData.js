@@ -1,25 +1,38 @@
 import { useState } from 'react';
 
 const useApplicationData = () => {
- const [displayModal, setDisplayModal] = useState(false);
- const [selectedImage, setSelectedImage] = useState(null);
- const [favorites, setFavorites] = useState([]);
+ // Group state variables into a single state object
+ const [state, setState] = useState({
+    displayModal: false,
+    selectedImage: null,
+    favorites: [],
+ });
 
  const toggleFavourite = (photoId, isFavorite) => {
-    if (isFavorite) {
-      setFavorites(favorites.filter(id => id !== photoId));
-    } else {
-      setFavorites([...favorites, photoId]);
-    }
+    setState(prevState => {
+      const newFavorites = isFavorite
+        ? prevState.favorites.filter(id => id !== photoId)
+        : [...prevState.favorites, photoId];
+
+      return { ...prevState, favorites: newFavorites };
+    });
+ };
+
+ const setDisplayModal = (display) => {
+    setState(prevState => ({ ...prevState, displayModal: display }));
+ };
+
+ const setSelectedImage = (image) => {
+    setState(prevState => ({ ...prevState, selectedImage: image }));
  };
 
  return {
     state,
-    displayModal,
+    displayModal: state.displayModal,
     setDisplayModal,
-    selectedImage,
+    selectedImage: state.selectedImage,
     setSelectedImage,
-    favorites,
+    favorites: state.favorites,
     toggleFavourite,
  };
 };
