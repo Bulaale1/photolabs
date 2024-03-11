@@ -1,77 +1,75 @@
 import { useReducer, useEffect } from "react";
-
+const useApplicationData = () => {
+  
 // initial state
 const initialState = {
- favPhotos: [],
- photoModal: null,
- photoData: [],
- topicData: [],
- topicId: null,
-};
-
-// action types
-export const ACTIONS = {
-  FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
-  FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
-  SELECT_PHOTO: 'SELECT_PHOTO',
-  CLOSE_SELECT_PHOTO: 'CLOSE_SELECT_PHOTO',
-  SET_PHOTO_DATA: 'SET_PHOTO_DATA',
-  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
-  GET_PHOTOS_BY_TOPIC: 'GET_PHOTOS_BY_TOPIC',
-  SET_TOPIC_ID: 'SET_TOPIC_ID',
-  REMOVE_TOPIC_ID: 'REMOVE_TOPIC_ID',
+  favPhotos: [],
+  photoModal: null,
+  photoData: [],
+  topicData: [],
+  topicId: null,
  };
-
-// reducer function
-const reducer = (state, action) => {
- switch (action.type) {
-    case ACTIONS.FAV_PHOTO_ADDED:
-      return {
-        ...state,
-        favPhotos: [...state.favPhotos, action.payload],
-      };
-    case ACTIONS.FAV_PHOTO_REMOVED:
-      return {
-        ...state,
-        favPhotos: state.favPhotos.filter(photo => photo.id !== action.payload.id),
-      };
-    case ACTIONS.SELECT_PHOTO:
-      return {
-        ...state,
-        photoModal: action.payload,
-      };
-    case ACTIONS.CLOSE_SELECT_PHOTO:
-      return {
-        ...state,
-        photoModal: null,
-      };
-    case ACTIONS.SET_PHOTO_DATA:
-      return {
-        ...state,
-        photoData: action.payload,
-      };
-    case ACTIONS.SET_TOPIC_DATA:
-      return {
-        ...state,
-        topicData: action.payload,
-      };
-    case ACTIONS.SET_TOPIC_ID:
-      return {
-        ...state,
-        topicId: action.payload,
-      };
-    case ACTIONS.REMOVE_TOPIC_ID:
-      return {
-        ...state,
-        topicId: null,
-      };
-    default:
-      return state;
- }
-};
-
-
-const useApplicationData = () => {
+ 
+ // action types
+  const ACTIONS = {
+   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
+   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
+   SELECT_PHOTO: 'SELECT_PHOTO',
+   CLOSE_SELECT_PHOTO: 'CLOSE_SELECT_PHOTO',
+   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+   GET_PHOTOS_BY_TOPIC: 'GET_PHOTOS_BY_TOPIC',
+   SET_TOPIC_ID: 'SET_TOPIC_ID',
+   REMOVE_TOPIC_ID: 'REMOVE_TOPIC_ID',
+  };
+ 
+ // reducer function
+ const reducer = (state, action) => {
+  switch (action.type) {
+     case ACTIONS.FAV_PHOTO_ADDED:
+       return {
+         ...state,
+         favPhotos: [...state.favPhotos, action.payload],
+       };
+     case ACTIONS.FAV_PHOTO_REMOVED:
+       return {
+         ...state,
+         favPhotos: state.favPhotos.filter(photo => photo.id !== action.payload.id),
+       };
+     case ACTIONS.SELECT_PHOTO:
+       return {
+         ...state,
+         photoModal: action.payload,
+       };
+     case ACTIONS.CLOSE_SELECT_PHOTO:
+       return {
+         ...state,
+         photoModal: null,
+       };
+     case ACTIONS.SET_PHOTO_DATA:
+       return {
+         ...state,
+         photoData: action.payload,
+       };
+     case ACTIONS.SET_TOPIC_DATA:
+       return {
+         ...state,
+         topicData: action.payload,
+       };
+     case ACTIONS.SET_TOPIC_ID:
+       return {
+         ...state,
+         topicId: action.payload,
+       };
+     case ACTIONS.REMOVE_TOPIC_ID:
+       return {
+         ...state,
+         topicId: null,
+       };
+     default:
+       return state;
+  }
+ };
  const [state, dispatch] = useReducer(reducer, initialState);
  useEffect(() => {
   if (state.topicId === null) {
@@ -108,6 +106,17 @@ useEffect(() => {
     })
     .catch((error) => console.log('Error fetching topics:', error));
 }, []);
+const fetchPhotosByTopic = (topicId) => {
+  fetch(`/api/topics/photos/${topicId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: ACTIONS.GET_PHOTOS_BY_TOPIC,
+        payload: data
+      });
+    })
+    .catch(error => console.log('Error', error));
+};
  const toggleFavourite = (photoId, isFavorite) => {
     if (isFavorite) {
       dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id: photoId } });

@@ -22,7 +22,7 @@ const App = () => {
     setDisplayModal={setDisplayModal} 
     toggleFavourite={toggleFavourite}
     setSelectedImage={setSelectedImage}/>
-    {state.displayModal && <PhotoDetailsModal  closeModal={() => setDisplayModal(false)}
+    {state.setDisplayModal && <PhotoDetailsModal  closeModal={() => setDisplayModal(false)}
     selectedImage={state.selectedImage} />}
      
     </div>
