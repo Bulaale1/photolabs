@@ -1,20 +1,26 @@
 
 import React from 'react';
-import '../styles/PhotoDetailsModal.scss';
+
 import closeSymbol from '../assets/closeSymbol.svg';
-import FavIcon from 'components/FavIcon';
-import PhotoList from 'components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoListItem from 'components/PhotoListItem';
+
+import '../styles/photoList.scss'
+import '../styles/PhotoDetailsModal.scss';
 const PhotoDetailsModal = (props) => {
- const { closeModal, selectedImage, toggleFavourite, favourites = [] } = props;
-
- // Check if selectedImage is not null before rendering content
- const shouldRenderContent = selectedImage !== null;
-
+  const similarPhotos = Object.keys(props.photoModal.similar_photos).map(photo => (
+    <PhotoListItem
+      key={props.photoModal.similar_photos[photo].id}
+      photoInfo={props.photoModal.similar_photos[photo]}
+      isFavourited={props.favPhotos.includes(props.photoModal.similar_photos[photo].id)}
+      toggleFavourite={props.toggleFavourite}
+      toggleModalForSelectedPhoto={props.toggleModalForSelectedPhoto}
+    />
+  ));
  return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button" onClick={closeModal}>
-        <img src={closeSymbol} alt="Close" />
+        <img src={closeSymbol} alt="CloseSymbol" />
       </button>
       <div>
       {shouldRenderContent && (
@@ -35,13 +41,11 @@ const PhotoDetailsModal = (props) => {
           </div>
           
           {/* Similar Photos */}
-          <div className="photo-details-modal__similar-photos">
-            <h3>Similar Photos</h3>
-            <PhotoList 
-            photos={Object.values(selectedImage.similar_photos)} 
-            favourites={favourites} toggleFavourite={toggleFavourite} 
-            />
-          </div>
+          <div className='photo-details-modal__top-bar'>
+          <ul className='photo-list photo-details-modal__images'>
+          {similarPhotos}
+        </ul>
+      </div>
         </div>
       )}
       </div>
