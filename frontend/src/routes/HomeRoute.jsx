@@ -2,16 +2,22 @@ import React from 'react';
 import '../styles/HomeRoute.scss';
 import TopNavigation from '../components/TopNavigationBar'
 import PhotoList from '../components/PhotoList';
-const HomeRoute = (props) => {
-    const { setDisplayModal,toggleFavourite, favourites} = props; 
+const HomeRoute = (favPhotos, toggleFavourite, photoModal, toggleModalForSelectedPhoto, photoData, topicData, togglePhotosByTopic) => {
+
   return (
     <div className="home-route">
-    <TopNavigation topics={props.topics} favouritePhotosExist={favourites}/>
-      <PhotoList 
-      photos={props.photos} 
-      setDisplayModal={setDisplayModal}
-      toggleFavourite={toggleFavourite}
-      favourites={favourites}/>
+    <TopNavigation
+        favPhotos={favPhotos}
+        topicData={topicData}
+        togglePhotosByTopic={togglePhotosByTopic}
+      />
+      <PhotoList
+        favPhotos={favPhotos}
+        toggleFavourite={toggleFavourite}
+        photoModal={photoModal}
+        toggleModalForSelectedPhoto={toggleModalForSelectedPhoto}
+        photoData={photoData}
+      />
     </div>
   );
 };
