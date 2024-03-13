@@ -26,3 +26,5 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+## acknowledgment
+I would like to acknowledge LHL instructors and mentors for their suggestion and mentorship during the process of building this React-based single-page application.
