@@ -2,9 +2,9 @@
 PhotoLabs is a React-based single-page application (SPA) that allows users to view photos in different contexts.
 
 ## Final Product
-!["photoslab-png"]
-!["animals-topic-png"]
-!["full-photo-png"]
+!["photoslab-png"]()
+!["animals-topic-png"](https://github.com/Bulaale1/photolabs/blob/main/frontend/docs/animals-topic-png.png?raw=true)
+!["full-photo-png"]()
 
 
 ## Setup
