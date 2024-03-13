@@ -1,5 +1,4 @@
 import { useReducer, useEffect } from "react";
-
 const useApplicationData = () => {
   const initialState = {
     favPhotos: [],
@@ -24,10 +23,13 @@ const useApplicationData = () => {
   const reducer = (state, action) => {
     switch (action.type) {
       case ACTIONS.FAV_PHOTO_ADDED:
-        return { ...state, favPhotos: [action.payload, ...state.favPhotos] };
+        return { ...state, 
+          favPhotos: [action.payload, ...state.favPhotos] };
       case ACTIONS.FAV_PHOTO_REMOVED:
         return { ...state, favPhotos: state.favPhotos.filter(item => action.payload !== item) };
       case ACTIONS.SELECT_PHOTO:
+        return {...state,photoModal: action.payload,
+        };
       case ACTIONS.CLOSE_SELECT_PHOTO:
         return { ...state, photoModal: action.payload };
       case ACTIONS.SET_PHOTO_DATA:
@@ -37,6 +39,7 @@ const useApplicationData = () => {
       case ACTIONS.GET_PHOTOS_BY_TOPIC:
         return { ...state, photoData: action.payload };
       case ACTIONS.SET_TOPIC_ID:
+        return { ...state, photoData: [], topicId: action.payload };
       case ACTIONS.REMOVE_TOPIC_ID:
         return { ...state, photoData: [], topicId: action.payload };
       default:
@@ -48,19 +51,20 @@ const useApplicationData = () => {
     const savedFavPhotos = localStorage.getItem('favPhotos');
     return savedFavPhotos ? { ...initial, favPhotos: JSON.parse(savedFavPhotos) } : initial;
   });
-
+//make a GET request to /api/photos
   useEffect(() => {
     if (state.topicId === null) {
-      fetch('/api/photos')
-        .then((res) => res.json())
+      fetch('http://localhost:8001/api/photos')
+        .then((response) => response.json())
         .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }))
         .catch(error => console.log('Error', error));
     }
   }, [state.topicId]);
 
+  //make a GET request to /api/topics
   useEffect(() => {
-    fetch('/api/topics')
-      .then((res) => res.json())
+    fetch('http://localhost:8001/api/topics')
+      .then((response) => response.json())
       .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }))
       .catch(error => console.log('Error', error));
   }, []);
@@ -76,12 +80,15 @@ const useApplicationData = () => {
     localStorage.setItem('favPhotos', savedFavPhotos);
   }, [state.favPhotos]);
 
+//Make a request to the backend to fetch photos for the specific topic clicked
   const fetchPhotosByTopic = (topicId) => {
-    fetch(`/api/topics/photos/${topicId}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+      .then((response) => response.json())
       .then((data) => dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPIC, payload: data }))
       .catch(error => console.log('Error', error));
   };
+  //Toggles the favorite status of a photo based on its current state. If the photo is already favorited,
+  // it removes it from favorites; otherwise, it adds it to favorites
 
   const toggleFavourite = (photoId) => {
     const isFavourited = state.favPhotos.includes(photoId);
@@ -91,11 +98,12 @@ const useApplicationData = () => {
       payload: photoId,
     });
   };
-
+//Opens or closes a modal for displaying details of a selected photo based on whether a photo is provided
   const toggleModalForSelectedPhoto = (photo) => {
     dispatch({ type: photo ? ACTIONS.SELECT_PHOTO : ACTIONS.CLOSE_SELECT_PHOTO, payload: photo });
   };
 
+//Sets or removes a topic filter for fetching photos based on whether a topic is provided
   const togglePhotosByTopic = (topic) => {
     dispatch({ type: topic ? ACTIONS.SET_TOPIC_ID : ACTIONS.REMOVE_TOPIC_ID, payload: topic });
   };

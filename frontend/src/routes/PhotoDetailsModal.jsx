@@ -5,10 +5,9 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoListItem from 'components/PhotoListItem';
 
-import '../styles/photoList.scss'
 import '../styles/PhotoDetailsModal.scss';
 const PhotoDetailsModal = (props) => {
-  const closeModal = props.toggleModalForSelectedPhoto;
+  const closeModal = ()=> props.toggleModalForSelectedPhoto();
   //iterate over similar photos
   const similarPhotos = Object.keys(props.photoModal.similar_photos).map(photo => (
     <PhotoListItem
@@ -24,7 +23,7 @@ const PhotoDetailsModal = (props) => {
       <button className="photo-details-modal__close-button" onClick={closeModal}>
         <img src={closeSymbol} alt="CloseSymbol" />
       </button>
-      <div className='photo-details-modal__container'>
+      
       <PhotoFavButton
         isFavourited={props.favPhotos.includes(props.photoModal.id)}
         toggleFavourite={() => props.toggleFavourite(props.photoModal.id)}
@@ -40,8 +39,8 @@ const PhotoDetailsModal = (props) => {
         </div>
       </div>
       <header className='photo-details-modal__header'>Similar Photos</header>
-    </div>
-          {/* Similar Photos */}
+    
+          {/* display Similar Photos */}
           <div className='photo-details-modal__top-bar'>
           <ul className='photo-list photo-details-modal__images'>
           {similarPhotos}

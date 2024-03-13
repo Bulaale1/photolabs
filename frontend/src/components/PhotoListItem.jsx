@@ -1,42 +1,31 @@
 import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
-
 const PhotoListItem = (props) => {
- const { id, location, urls, user } = props.photo;
- const { setDisplayModal, toggleFavourite, favourites = [] } = props;
+  const { isFavourited, photoInfo, toggleFavourite, toggleModalForSelectedPhoto } = props
 
- const handleImageClick = () => {
-    
-    if (props.onImageClick) {
-      props.onImageClick({ id, location, urls, user });
-    }
- };
-
- return (
-    <div className="photo-list__item">
-      <PhotoFavButton
-        toggleFavourite={toggleFavourite}
-        photoId={id}
-        favourites={favourites} 
-      />
-      <img src={urls.full} alt={`Photo ${id}`} className="photo-list__image"
-        onClick={() => {
-          setDisplayModal(true, { id, location, urls, user });
-          handleImageClick();
-        }}
-      />
+  // Function to open the modal for the selected photo
+  const openModal = () => toggleModalForSelectedPhoto(photoInfo);
+  return (
+    // Container for a photo list item
+    <div key={photoInfo.id} className="photo-list__item">
+  
+      <PhotoFavButton isFavourited={isFavourited} toggleFavourite={() => toggleFavourite(photoInfo.id)} />
+      
+      <img className="photo-list__image" src={photoInfo.urls.regular} onClick={openModal} />
+     
       <div className="photo-list__user-details">
+        
+        <img className="photo-list__user-profile" src={photoInfo.user.profile} />
         <div className="photo-list__user-info">
-          <img src={user.profile} className="photo-list__user-profile" alt={`${user.profile}'s profile picture`} />
-          <p>{user.name}</p>
-          <p className="photo-list__user-location">
-            {location.city}, {location.country}
-          </p>
+          <h3>{photoInfo.user.name}</h3>
+          <h3 className="photo-list__user-location">{`${photoInfo.location.city}, ${photoInfo.location.country}`}</h3>
         </div>
       </div>
     </div>
- );
+  );
 };
+
+
 
 export default PhotoListItem;

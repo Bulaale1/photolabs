@@ -1,28 +1,25 @@
 import React from "react";
+
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
-const PhotoList = (props) => {
-  const { setDisplayModal,toggleFavourite, favourites } = props;
-  const photData = props.photos;
 
-  //isFavourite={favourites.includes(photo.id)}
-    
+const PhotoList = (props) => {
+  
+  const { favPhotos, toggleFavourite, photoModal, toggleModalForSelectedPhoto, photoData =[] } = props
+
   return (
     <ul className="photo-list">
-    {photData.map((photo) => (
-      <PhotoListItem 
-      key={photo.id} 
-
-      photo = {photo} 
-      
-      setDisplayModal={setDisplayModal}
-
-      toggleFavourite={toggleFavourite}
-
-      isFavourite={favourites}
-      />      
+    {photoData.map((photoObject) => (
+      <PhotoListItem
+        key={photoObject.id}
+        photoInfo={photoObject}
+        isFavourited={favPhotos.includes(photoObject.id)}
+        toggleFavourite={toggleFavourite}
+        photoModal={photoModal}
+        toggleModalForSelectedPhoto={toggleModalForSelectedPhoto}
+      />
     ))}
-    </ul>
-  );
-};
+  </ul>)
+    };
+
 export default PhotoList;

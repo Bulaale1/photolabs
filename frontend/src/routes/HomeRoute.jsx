@@ -2,7 +2,8 @@ import React from 'react';
 import '../styles/HomeRoute.scss';
 import TopNavigation from '../components/TopNavigationBar'
 import PhotoList from '../components/PhotoList';
-const HomeRoute = (favPhotos, toggleFavourite, photoModal, toggleModalForSelectedPhoto, photoData, topicData, togglePhotosByTopic) => {
+const HomeRoute = (props) => {
+  const {favPhotos, toggleFavourite, photoModal, toggleModalForSelectedPhoto, photoData, topicData, togglePhotosByTopic} = props
 
   return (
     <div className="home-route">
